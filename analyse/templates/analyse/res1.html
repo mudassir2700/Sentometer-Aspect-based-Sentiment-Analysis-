@@ -1,0 +1,205 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> 
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js" ></script>
+
+        
+    <link rel="stylesheet" type="text/css" href="{% static 'analyse/new.css' %}" />
+     
+</head>
+<body style="background-color: #F9F9F9;">
+<div>
+<h1>FIXED NAVBAR</h1>
+</div>
+  <nav class="navbar navbar-inverse navbar-fixed-top" id = "cen" >
+  <div class="container">
+  <div class="navbar-header">
+		<center><h1 style="color: white;font-size: 20px;"></h1></center>
+    </div>
+    </div>
+    </nav>
+   
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4" id = "image">
+        
+          <center><img id="product-image" src="{{img_url}}" alt="image" style="background-color: #F9F9F9;" /></center>
+        </div>
+        <div class="col-md-8">
+          <table class="table table-bordered">
+        <tbody>       
+              <tr class="success"><td class="label1"> Name </td><td class="value">{{name}}</td></tr>
+               <tr class="success"><td class="label1"> Price </td><td class="value">{{price}}</td></tr>
+                <tr class="success"><td class="label1"> Rating </td><td class="value">{{rating}}</td></tr>
+                {% for i in details %}
+                 <tr class="success">
+
+                 	<td class="label1"> Details </td>
+                 	
+                 	<td class="value">{{i}}</td>
+                 	
+                 </tr>
+                 {% endfor %}
+                        
+          </tbody>
+        </table>
+        
+        </div>
+        
+      </div>
+
+    </div>
+    
+    <br>
+
+    <div class="container">
+    	<div class="row">
+    		<div class="col-md-4" id = 'radio-home'>
+    			{% for spec in data_features %}
+    			 <label><input type="radio" name="feature" value={{spec}} id={{spec}}> <a href="{% url 'analyse:aspects' finalst=finalst spec=spec  %}">{{spec}}</a></label>
+    			<hr>
+    			{% endfor %}
+    		</div>
+    		<div  class="col-md-8" >
+    			<div class = "chart" >
+    				<div>
+    					<h1 id ="heading" >Select any Aspect </h1>
+    				</div>
+            <div>
+              <h1 id ="heading" >{{labels1}} Reviews %: </h1>
+            </div>
+             <div>
+              <hr>
+              <h4>Positive Reviews :{{positive}}% </h4>
+              <h4>Negative Reviews :{{negative}}% </h4>
+              <h4>Neutral Reviews :{{neutral}}% </h4>
+              
+              
+            </div>
+    				<hr>
+    				<canvas id="myChart" width="500" height="200px"></canvas>
+    			</div>
+    			<br>
+    			<br>
+    			<div class="comments positive">
+    				<h3 id = "pos" style="text-align: center;">
+    					Top Positive Comments
+    				</h3>
+    				<hr>
+    					
+    				</hr>
+					<ul id="positive-comments">
+					{% if pos_comment %}
+            {% for j in pos_comment %}
+            <h3>{{j}}</h3>
+            {% endfor %}
+            {% endif %}
+					</ul>
+				</div>
+				<br>
+				<div class="comments negative">
+					<h3 id ="neg" style="text-align: center;">
+						Top Negative Comments
+					</h3>
+					<hr></hr>
+					<ul id="negative-comments">
+            {% if neg_comment %}
+            {% for j in neg_comment %}
+            <h3>{{j}}</h3>
+            {% endfor %}
+            {% endif %}
+            
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+    </div>
+
+    
+<script>
+
+	var ctx = document.getElementById('myChart');
+	var z={{labels}}
+	console.log(z)
+	var labels=[]
+	if(z==0){
+		labels[0]='Camera-Positive %'
+		labels[1]='Camera-Neutral %'
+    labels[2]='Camera-Negative %'
+	}
+  if(z==1){
+    labels[0]='Battery-Positive %'
+    labels[1]='Battery-Neutral %'
+    labels[2]='Battery-Negative %'
+  }
+  if(z==2){
+    labels[0]='Performance-Positive %'
+    labels[1]='Performance-Neutral %'
+    labels[2]='Performance-Negative %'
+  }
+  if(z==3){
+    labels[0]='Storage-Positive %'
+    labels[1]='Storage-Neutral %'
+    labels[2]='Storage-Negative %'
+  }
+  if(z==4){
+    labels[0]='Budget-Positive %'
+    labels[1]='Budget-Neutral %'
+    labels[2]='Budget-Negative %'
+  }
+	//labels=['positive','negative']
+	var myChart = new Chart(ctx, {
+	    type: 'pie',
+	    data: {
+	        labels: labels,
+	        datasets: [{
+	            label: 'Reviews',
+	            data: {{default}},
+	            backgroundColor: [
+	                'rgb(255,127,80,1)',
+                  'rgb(169,169,169)',
+	                'rgba(54, 162, 235, 1)',
+	                
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 0.4)',
+	                'rgba(54, 162, 235, 0.4)',
+	                
+	            ],
+	            borderWidth: 1
+	        }]
+	    }
+	    
+	});
+
+//when documnet is completely loaded load this scripts
+
+</script>
+<style type="text/css">
+  .comments.negative {
+    border: 1px solid #e9e9e9;
+    background-color: rgba(54, 162, 235) ;
+    color: antiquewhite;
+    border-radius: 25px;
+    padding-bottom: 25px;
+}
+.comments.positive {
+    border: 1px solid #e9e9e9;
+    background-color: rgb(255,127,80) ;
+    color: antiquewhite;
+    border-radius: 25px;
+    padding-bottom: 25px;
+}
+</style>
+</body>
+</html>

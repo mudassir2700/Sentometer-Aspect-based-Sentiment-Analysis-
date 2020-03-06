@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+ <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> 
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js" ></script>
+</head>
+<body>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Hello!!</h2>
+      
+
+      
+    </div>
+    
+  </div>
+  <canvas id="myChart" width="500" height="200"></canvas>
+  <script type="text/javascript">
+    /*
+    var endpoint='/charts-data/'
+    var djangoresult=parseInt('{{customers}}')
+    var djangoresult1=parseInt('{{sales}}')
+    console.log(djangoresult)
+    console.log(djangoresult1)
+    //var defaultdata=[]
+    //var labels=[]
+    $.ajax({
+      method:'GET',
+      url:endpoint,
+      success:function(data){
+        //console.log(data)
+        labels=data.labels
+        defaultdata=data.default
+      },
+      error:function(error_data){
+        console.log('error')
+        console.log(error_data)
+      }
+    })
+    */
+
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['positive','negative'],
+        datasets: [{
+            label: 'Reviews',
+            data: {{default}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+  </script>
+
+</body>
+</html>

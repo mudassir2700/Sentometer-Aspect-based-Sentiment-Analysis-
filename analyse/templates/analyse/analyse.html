@@ -1,0 +1,553 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> 
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js" ></script>
+        
+    <link rel="stylesheet" type="text/css" href="{% static 'analyse/new.css' %}" />
+
+    <style type="text/css">
+      *{margin: 0; padding: 0;}
+.my-nav{position: relative;
+       top:20px;
+       width: 100%;
+       z-index: 999;
+       background:none;
+       border: none;
+       border-radius: 0;
+     
+ }
+ 
+.my-nav {
+  background-color:rgba(0,0,0,0.00);
+  border-color: rgba(0,0,0,0.00);
+}
+.my-nav .navbar-brand {
+  color: #ecf0f1;
+}
+.my-nav .navbar-brand:hover,
+.my-nav .navbar-brand:focus {
+  color: #ecdbff;
+}
+.my-nav .navbar-text {
+  color: #ecf0f1;
+}
+.my-nav .navbar-nav > li > a {
+  color: #ecf0f1;
+}
+.my-nav .navbar-nav > li > a:hover,
+.my-nav .navbar-nav > li > a:focus {
+  color: #ecdbff;
+}
+.my-nav .navbar-nav > .active > a,
+.my-nav .navbar-nav > .active > a:hover,
+.my-nav .navbar-nav > .active > a:focus {
+  color: #ecdbff;
+  background-color: #3962ff;
+}
+.my-nav .navbar-nav > .open > a,
+.my-nav .navbar-nav > .open > a:hover,
+.my-nav .navbar-nav > .open > a:focus {
+  color: #ecdbff;
+  background-color: #3962ff;
+}
+.my-nav .navbar-toggle {
+  border-color: #3962ff;
+}
+.my-nav .navbar-toggle:hover,
+.my-nav .navbar-toggle:focus {
+  background-color: #3962ff;
+}
+.my-nav .navbar-toggle .icon-bar {
+  background-color: #ecf0f1;
+}
+.my-nav .navbar-collapse,
+.my-nav .navbar-form {
+  border-color: #ecf0f1;
+}
+.my-nav .navbar-link {
+  color: #ecf0f1;
+}
+.my-nav .navbar-link:hover {
+  color: #ecdbff;
+}
+ 
+@media (max-width: 767px) {
+  .my-nav .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1;
+  }
+  .my-nav .navbar-nav .open .dropdown-menu > li > a:hover,
+  .my-nav .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ecdbff;
+  }
+  .my-nav .navbar-nav .open .dropdown-menu > .active > a,
+  .my-nav .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .my-nav .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ecdbff;
+    background-color: #3962ff;
+  }
+}
+ 
+/*for full screen landing page*/
+html,body{margin: 0;padding: 0; width: 100%; height: 100%;}
+ 
+.wrapper{top:-70px;
+    position: relative;
+    width: 100%;
+      height: 100%;
+    background: url("{% static 'milkyway.jpg' %}");
+    display: table;
+    background-size: cover;
+}
+.wrapper .inner{
+     
+    display: table-cell;
+    vertical-align: middle;
+    widows: 100%;
+    max-width: none;
+}
+.content{
+    text-align: center;
+    max-width: 7000px;
+    margin: 0 auto;
+}
+ 
+.content h2{color: #ffffff;
+      font-family: 'Raleway',sand-serif;
+      text-shadow: 0 0 300px #000;
+    font-size: 300%;
+     
+ }
+.content p{color: aliceblue;font-size: 16px; font-family: Gill Sans, Gill Sans MT, Myriad Pro, DejaVu Sans Condensed, Helvetica, Arial," sans-serif"; margin: 20px 0;}
+ 
+.thumbnail{border: none;}
+ 
+ 
+ 
+ 
+@media only screen and (max-width: 767px) {
+    .my-carousel{position: relative;
+            top:0px;
+                  
+}
+     
+    .navbar-default .navbar-toggle .icon-bar {
+    background-color: #ffffff !important;
+}
+     
+    .navbar .navbar-brand {
+  color: white;
+}
+    .navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+  color:wheat;
+}
+    .my-nav{top:0;}
+    .navbar{margin-bottom: 0;}
+     
+.navbar-default .navbar-nav > li > a{color: black;}   /*link color change*/
+     
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color:#000000;
+    color: #fffff0;
+}/*change link color*/
+ 
+     .navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
+    background-color: black;
+    color:#ffffff;
+  }/*change dropdown link color*/
+    .navbar-default .navbar-toggle .icon-bar {
+    background-color: black;
+}/*icon bar color*/
+    .thumbnail{text-align: center;}
+     
+}
+ 
+.my-carousel {top:-70px}
+
+    </style>
+     
+</head>
+<body style="background-color: #F9F9F9;">
+
+
+
+<nav class="navbar my-nav navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+      <a class="navbar-brand" href="#">Brand</a></div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="defaultNavbar1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+   
+  <div class="wrapper">
+    <div class="inner">
+        <div class="content">
+            <h2 class="wow fadeInDown" data-wow-delay="1s">Full screen landing page with transpatent nav.</h2>
+            <p class="wow bounceInLeft" data-wow-delay="1s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure labore voluptate sapiente fuga, ea. Quod ut neque, beatae, architecto fuga saepe. </p>
+            <button class="wow bounceInLeft btn btn-danger btn-lg">click here</button>
+        </div>
+    </div>
+  </div>
+ 
+   
+  <div class="container">
+    <div class="row">
+      <div class="row">
+          <div class="col-md-4 wow bounceInRight" data-wow-duration="1s" data-wow-delay="1s">
+            <div class="thumbnail"><img src="images/Eiffel-Tower-l.jpg" alt="Thumbnail Image 1">
+              <div class="caption">
+                <h3>Travel package 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid officia facere, tenetur similique, sapiente optio magni, expedita laborum mollitia saepe perspiciatis! Sint qui hic repudiandae, nobis quod ipsum deserunt sed.</p>
+                <p><a href="#" class="btn btn-primary" role="button">Bye now!</a></p>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4 wow bounceInDown" data-wow-duration="1s" data-wow-delay="1s">
+          <div class="thumbnail"><img src="images/Holivudas-3.jpg" alt="Thumbnail Image 1">
+              <div class="caption">
+                <h3>Travel package 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt voluptate numquam impedit esse recusandae iure rem expedita totam asperiores reiciendis repellendus adipisci obcaecati sint, sed sunt natus, excepturi eum illo.</p>
+                <p><a href="#" class="btn btn-primary" role="button">Bye now!</a></p>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4 wow bounceIn" data-wow-duration="1s" data-wow-delay="1s">
+          <div class="thumbnail"><img src="images/River-Boat-AMA-Danube-View-A-Excellent.jpg" alt="Thumbnail Image 1">
+              <div class="caption">
+                <h3>Travel package 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut quis quibusdam totam, facere voluptatibus. Commodi sit, exercitationem expedita aliquam incidunt. Cupiditate laborum expedita accusamus neque velit amet repudiandae nemo fugiat?</p>
+                <p><a href="#" class="btn btn-primary" role="button">Bye now!</a></p>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+ 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-1.11.3.min.js"></script>
+ 
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.js"></script>
+ 
+ 
+ <script src="js/wow.js"></script>
+ <script>
+      new WOW().init();
+ </script> 
+
+
+
+  
+   
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4" id = "image">
+        
+          <center><img id="product-image" src="" alt="image" style="background-color: #F9F9F9;" /></center>
+        </div>
+        <div class="col-md-8">
+          <table class="table table-bordered">
+        <tbody>       
+          {% for s1,s2 in specs_list %}
+              <tr class="success"><td class="label1"> {{s1}} </td><td class="value">{{s2}}</td></tr>
+                        
+          {% endfor %}
+          </tbody>
+        </table>
+        
+        </div>
+        
+      </div>
+
+    </div>
+    
+    <br>
+    <div class="col-md-offset-1">
+
+    <form class="form-inline" id ="custom-spec" action="/analyse/newspec/" method="post">
+        {% csrf_token %}  
+        <div class="form-group">
+          {{form}}
+        </div>
+        <div class="form-group">
+        <button type="submit"  id="custom-spec-btn" class="btn btn-primary col-md-offset-1">button</button>
+        </div>
+        <br>
+        <br>
+    </form>
+    </div>
+		<div class="container">
+              <div class="row">
+                  <div class="col-md-4" id = 'radio-home' >
+                  
+						{% for spec,sent in data %}
+						<label><input type="radio" name="feature" value={{sent}} id={{spec}}>  {{spec}}</label>
+						<hr>
+						{% endfor %}						
+                  
+                  </div>
+                  <div  class="col-md-8" >
+                  <div class = "chart" >
+                  <div><h1 id ="heading" >Select any item </h1></div>
+                    
+                    <hr>
+					<canvas id="chart" width="500" height="200px"></canvas>
+          </div>
+          <br><br>
+					<div class="comments positive">
+          <h3 id = "pos"></h3>
+          <hr></hr>
+					<ul id="positive-comments">
+					<!-- javascript prints comments here by parsing JSON obj -->
+					</ul>
+					</div>
+          <br>
+					<div class="comments negative">
+          <h3 id ="neg"></h3>
+          <hr></hr>
+          <ul id="negative-comments">
+          <!-- javascript prints comments here by parsing JSON obj -->
+          </ul>
+					</div>
+                  </div>
+              </div>
+          </div>
+
+
+
+<script>
+
+//when documnet is completely loaded load this scripts
+$(document).ready(function(){
+
+	radioButtonClickListener();
+  displayImage();
+  formSubmitListener();
+
+});
+
+var obj = {{ comments|safe}};
+//global variables
+var myChart;
+
+function radioButtonClickListener() {
+
+	$('input[type=radio][name=feature]').change(function() {
+
+		var heading = $(this).attr("id");
+		var value = $(this).val();
+
+		//set chart heading
+		$("#heading").text(heading);
+
+		//load chart
+		displayChart(value);
+    displayComments(heading);
+	});
+}
+
+function displayChart(value) {
+
+	//destroy existing chart if any and load new chart
+	if(myChart != null){					
+					
+		myChart.destroy();
+	}	
+
+	//creation of new chart
+	var ctx = $("#chart");
+	myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data : {
+    labels: [
+        "Positive",
+        "Negative"
+    ],
+    datasets: [
+        {
+            data: [value, (10.0 - value).toFixed(1)],
+            backgroundColor: [
+                "#5cd65c",
+                "#ff4d4d"
+            ],
+            hoverBackgroundColor: [
+                "#2eb82e",
+                "#ff1a1a"
+            ]
+        }]
+}
+});
+}
+function displayComments(heading) {
+	
+	
+
+	for (var key in obj) {
+    	if (obj.hasOwnProperty(key)) {
+        if(key == heading)
+        {
+          //console.log(obj[key]);
+        	var comments = obj[key];
+        //where to append lists	
+        $("#pos").text("Positive Comments");
+        $("#neg").text("Negative Comments");
+
+        var positiveComments = $('#positive-comments')
+        positiveComments.html("") ;
+
+        var negativeComments = $('#negative-comments')
+        negativeComments.html("") ;
+
+        //appending loop
+        for(var i = 0 ;i < 5;i++)
+        {
+          var li = $('<li/>')
+          .text(comments[i][1])
+          .appendTo(negativeComments);
+          
+          var index = comments.length - 1 - i;
+          var li = $('<li/>')
+          .text(comments[index][1])
+          .appendTo(positiveComments);
+        }
+		
+  }
+    }
+}
+}
+
+function displayImage(){
+
+  var image = {{image|safe}};
+
+  $("#product-image").attr("src", image);
+}
+
+
+
+function formSubmitListener(){
+
+  $("#custom-spec").on("submit", function(e){
+
+    e.preventDefault();
+
+      var url = "/analyse/newspec/";
+
+            $.ajax({
+              type : 'POST',
+              url : url,
+              data : new FormData($(this)[0]),
+              /* data : $(this).serialize(), */
+              /* enctype : 'multipart/form-data', */
+              /* encoding : 'multipart/form-data', */
+              cache : false,
+              processData : false,
+              contentType : false,
+              beforeSend: function() {
+                $("#custom-spec-btn").prop('disabled', true);
+              },
+              success : function(response) {
+                response = JSON.parse(response);
+                var heading = response.heading;
+                var comments_spec = response.comments_spec;
+                
+                obj[heading] = comments_spec[heading];
+                
+                var label = document.createElement("label");
+                var radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "feature";
+                radio.value = response.value;
+                radio.id = response.heading;
+
+                label.appendChild(radio);
+                radio_home = document.getElementById("radio-home");
+                text = ' '+ heading;
+                label.appendChild(document.createTextNode(text));
+                radio_home.appendChild(label);
+                $("#heading").text(heading);
+                displayChart(response.value);
+                displayComments(heading)
+
+                var hrtag = "<hr/>";
+                $(label).after(hrtag);  
+
+                $("#custom-spec-btn").prop('disabled', false);
+                radioButtonClickListener();
+
+
+              },
+              error : function(XMLHttpRequest,
+                  textStatus, errorThrown) {                
+                /* console.info("Status: " + XMLHttpRequest);
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown); */
+                alert("Error occured, try again.")
+                $("#custom-spec-btn").prop('disabled', false);
+              }
+            });
+
+  });
+}
+</script>
+<style type="text/css">
+  .comments.negative {
+    border: 1px solid #e9e9e9;
+    background-color: #DE5252 ;
+    color: antiquewhite;
+    border-radius: 25px;
+    padding-bottom: 25px;
+}
+</style>
+</body>
+</html>
